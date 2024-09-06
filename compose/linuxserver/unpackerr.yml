@@ -1,0 +1,31 @@
+services:
+  #unpackerr unpacks archieves synced from syncthing
+  unpackerr:
+    image: golift/unpackerr
+    container_name: unpackerr
+    security_opt:
+      - no-new-privileges:true
+    restart: "unless-stopped"
+    networks:
+      - default
+    volumes:
+      - $DOCKERDIR/appdata/unpackerr:/config
+      - $DATADIR/data/downloads:/downloads  # Ensure this is the path where your apps store completed downloads
+    environment:
+      - TZ=${TZ}
+      - PUID=${PUID}
+      - PGID=${PGID}
+      # Configuration Environment Variables for Unpackerr
+      - UN_SONARR_URL=http://172.18.0.4:8989  # Adjust if different
+      - UN_SONARR_API_KEY=cf25870eaa8548df94ff5181ee2d28fe  # Replace with your actual API key
+      - UN_RADARR_URL=http://172.18.0.7:7878  # Adjust if different
+      - UN_RADARR_API_KEY=f3894b110d6a4cd09f81ed7fe46cf634  # Replace with your actual API key
+      #- UN_LIDARR_URL=http://lidarr:8686  # Adjust if different
+      #- UN_LIDARR_API_KEY=your_lidarr_api_key  # Replace with your actual API key
+      - UN_INTERVAL=2m  # Polling interval
+      - UN_DELETE_DELAY=5m  # Time to wait before deleting extracted files
+
+    depends_on:
+      - radarr
+      - sonarr
+      #- lidarr  # Include this only if you use Lidarr
