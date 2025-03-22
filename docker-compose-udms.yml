@@ -34,3 +34,6 @@ include:
   - compose/$HOSTNAME/bazarr.yml
   - compose/$HOSTNAME/prowlarr.yml
   - compose/$HOSTNAME/unpackerr.yml
+
+  #Network Services
+  - compose/$HOSTNAME/pihole.yml
