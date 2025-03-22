@@ -17,6 +17,7 @@ services:
       - $DATADIR/data/media/shows:/data/shows1
       - $DATADIR/data2/media/shows:/data/shows2
       - $DATADIR:/data/downloads 
+      #- $DATADIR:/  
       - "/etc/localtime:/etc/localtime:ro"
     environment:
       TZ: $TZ
