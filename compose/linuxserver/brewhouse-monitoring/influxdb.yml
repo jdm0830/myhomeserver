@@ -1,0 +1,22 @@
+services:
+  tilt_influxdb:
+    image: influxdb:2.7
+    container_name: tilt_influxdb
+    restart: unless-stopped
+    ports:
+      - "8086:8086"
+    volumes:
+      - /srv/docker/appdata/tilt-influxdb2:/var/lib/influxdb2
+    secrets:
+      - influx_password
+      - influx_admin_token
+    environment:
+      - TZ=${TZ}
+      # One-time setup (edit these BEFORE first start)
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD_FILE=/run/secrets/influx_password
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN_FILE=/run/secrets/influx_admin_token
+      - DOCKER_INFLUXDB_INIT_ORG=brewhouse
+      - DOCKER_INFLUXDB_INIT_BUCKET=tilt
+      - DOCKER_INFLUXDB_INIT_RETENTION=0

@@ -12,7 +12,10 @@ networks:
 secrets:
   plex_claim:
     file: $DOCKERDIR/secrets/plex_claim
-
+  influx_password:
+    file: $DOCKERDIR/secrets/influx_password
+  influx_admin_token:
+    file: $DOCKERDIR/secrets/influx_admin_token
 
 include:
   ########################### SERVICES
@@ -24,6 +27,8 @@ include:
   - compose/$HOSTNAME/portainer.yml
   - compose/$HOSTNAME/dozzle.yml
   - compose/$HOSTNAME/homepage.yml
+  - compose/$HOSTNAME/homarr.yml
+
 
   #Media
   - compose/$HOSTNAME/plex.yml
@@ -37,3 +42,7 @@ include:
 
   #Network Services
   - compose/$HOSTNAME/pihole.yml
+
+  # Brewing House
+  - compose/$HOSTNAME/brewhouse-monitoring/influxdb.yml
+  - compose/$HOSTNAME/brewhouse-monitoring/grafana.yml

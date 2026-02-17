@@ -1,0 +1,15 @@
+services:
+  homarr:
+    image: ghcr.io/homarr-labs/homarr:latest
+    container_name: homarr
+    restart: unless-stopped
+    ports:
+      - "7575:7575"
+    volumes:
+      - $DOCKERDIR/appdata/homarr/configs:/app/configs
+      - $DOCKERDIR/appdata/homarr/data:/data
+      - $DOCKERDIR/appdata/homarr/icons:/app/public/icons
+    environment:
+      - TZ=$TZ
+      - SECRET_ENCRYPTION_KEY=c8db426c4867334aeeb0d934d64e88db2eb37a8fa40cf3b35ae8e481e1dd3c73
+      - AUTH_ENABLED=false

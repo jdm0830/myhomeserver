@@ -1,0 +1,11 @@
+services:
+  tilt_grafana:
+    image: grafana/grafana:latest
+    container_name: tilt_grafana
+    restart: unless-stopped
+    ports:
+      - "3001:3000"
+    volumes:
+      - /srv/docker/appdata/tilt-grafana:/var/lib/grafana
+    environment:
+      - TZ=${TZ}
