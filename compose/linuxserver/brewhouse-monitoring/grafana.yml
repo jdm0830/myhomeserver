@@ -9,3 +9,5 @@ services:
       - /srv/docker/appdata/tilt-grafana:/var/lib/grafana
     environment:
       - TZ=${TZ}
+      - GF_SECURITY_ALLOW_EMBEDDING=true
+

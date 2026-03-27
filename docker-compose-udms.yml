@@ -22,6 +22,7 @@ include:
   # PREFIX udms = Ultimate Docker Media Server
   # HOSTNAME=udms - defined in .env
 
+
   # CORE
   - compose/$HOSTNAME/socket-proxy.yml
   - compose/$HOSTNAME/portainer.yml
@@ -46,3 +47,6 @@ include:
   # Brewing House
   - compose/$HOSTNAME/brewhouse-monitoring/influxdb.yml
   - compose/$HOSTNAME/brewhouse-monitoring/grafana.yml
+
+  #Home Automation
+  - compose/$HOSTNAME/homeassistant.yml

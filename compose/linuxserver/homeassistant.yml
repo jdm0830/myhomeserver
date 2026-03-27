@@ -1,0 +1,18 @@
+services:
+  homeassistant:
+    container_name: homeassistant
+    image: ghcr.io/home-assistant/home-assistant:stable
+    restart: unless-stopped
+
+    # Key for ESPHome + discovery (mDNS/SSDP/etc)
+    network_mode: host
+
+    # Helps future hardware/integrations; safe to start with
+    privileged: true
+
+    environment:
+      - TZ=America/Los_Angeles
+
+    volumes:
+      - /mnt/2hd/share/docker/appdata/homeassistant:/config
+      - /etc/localtime:/etc/localtime:ro
