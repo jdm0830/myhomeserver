@@ -29,7 +29,7 @@ include:
   - compose/$HOSTNAME/dozzle.yml
   - compose/$HOSTNAME/homepage.yml
   - compose/$HOSTNAME/homarr.yml
-
+  - compose/$HOSTNAME/glances.yml
 
   #Media
   - compose/$HOSTNAME/plex.yml

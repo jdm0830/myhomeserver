@@ -1,0 +1,32 @@
+services:
+  # Glances - System Monitoring
+  glances:
+    image: nicolargo/glances:3.4.0.5-full
+    container_name: glances
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    #profiles: ["apps", "all"]
+    networks:
+      - default
+    ports:
+      - "61208:61208"
+    volumes:
+      - $DOCKERDIR/appdata/glances:/config
+      - "/etc/localtime:/etc/localtime:ro"
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /:/host:ro
+    environment:
+      TZ: $TZ
+      PUID: $PUID
+      PGID: $PGID
+      GLANCES_OPT: "-w"
+
+    ##labels:
+      ##- "traefik.enable=true"
+      # HTTP Routers
+      ##- "traefik.http.routers.glances-rtr.entrypoints=websecure"
+      ##- "traefik.http.routers.glances-rtr.rule=Host(`glances.$DOMAINNAME_HS`)"
+      # HTTP Services
+      ##- "traefik.http.routers.glances-rtr.service=glances-svc"
+      ##- "traefik.http.services.glances-svc.loadbalancer.server.port=61208"
